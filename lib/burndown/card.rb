@@ -9,7 +9,8 @@ module Burndown
     end
 
     def estimative
-      name[/\d/].to_i
+      return nil unless name =~ /\d+/
+      name[/\d+/].to_i
     end
 
   end
