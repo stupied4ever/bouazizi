@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Burndown
+module Bouazizi
   describe Card do
     subject(:card) { Card.new name: name }
 

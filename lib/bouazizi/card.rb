@@ -1,6 +1,6 @@
 require 'active_support/core_ext/hash/indifferent_access'
 
-module Burndown
+module Bouazizi
   class Card < Trello::Card
 
     def initialize fields = {}
@@ -28,6 +28,5 @@ module Burndown
           \g<real_effort>? \g<estimative>?
         /x
     end
-
   end
 end
