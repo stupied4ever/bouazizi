@@ -4,11 +4,11 @@ module Burndown
   describe Card do
     subject(:card) { Card.new name: name }
 
-    describe '#estimatives' do
-      subject { card.estimatives }
+    describe '#metrics' do
+      subject { card.metrics }
 
-      context 'without estimative' do
-        let(:name) { 'easy card without estimatives' }
+      context 'without metrics' do
+        let(:name) { 'easy card without metrics' }
 
         it { expect(subject).to eq({}) }
       end

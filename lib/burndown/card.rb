@@ -8,11 +8,11 @@ module Burndown
       super fields
     end
 
-    def estimatives
-      if estimatives = estimatives_regex.match(name)
-        estimatives.names.inject(HashWithIndifferentAccess.new){ |hash, e|
+    def metrics
+      if metrics = metrics_regex.match(name)
+        metrics.names.inject(HashWithIndifferentAccess.new){ |hash, e|
 
-          hash.store e, estimatives[e][/\d+/].to_i unless estimatives[e].nil?
+          hash.store e, metrics[e][/\d+/].to_i unless metrics[e].nil?
           hash
         }
       else
@@ -20,7 +20,7 @@ module Burndown
       end
     end
 
-    def estimatives_regex
+    def metrics_regex
         /
           (?<real_effort>\[(\d+)\]){0}
           (?<estimative>\((\d+)\)){0}
