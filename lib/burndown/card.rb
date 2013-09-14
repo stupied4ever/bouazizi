@@ -9,18 +9,20 @@ module Burndown
     end
 
     def estimative
-      estimative = estimatives[:estimative]
-      return nil unless estimative
-      estimative[/\d+/].to_i
+      estimatives[:estimative]
     end
 
     private
 
     def estimatives
-      estimatives_regex.match(name) || {
-        estimative: nil,
-        effort:     nil
-      }
+      if estimatives = estimatives_regex.match(name)
+        estimatives.names.inject(HashWithIndifferentAccess.new){ |hash, e|
+          hash.store e, estimatives[e][/\d+/].to_i
+          hash
+        }
+      else
+        Hash.new(nil)
+      end
     end
 
     def estimatives_regex
