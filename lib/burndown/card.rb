@@ -8,28 +8,24 @@ module Burndown
       super fields
     end
 
-    def estimative
-      estimatives[:estimative]
-    end
-
-    private
-
     def estimatives
       if estimatives = estimatives_regex.match(name)
         estimatives.names.inject(HashWithIndifferentAccess.new){ |hash, e|
-          hash.store e, estimatives[e][/\d+/].to_i
+
+          hash.store e, estimatives[e][/\d+/].to_i unless estimatives[e].nil?
           hash
         }
       else
-        Hash.new(nil)
+        Hash.new
       end
     end
 
     def estimatives_regex
         /
+          (?<real_effort>\[(\d+)\]){0}
           (?<estimative>\((\d+)\)){0}
 
-          \g<estimative>
+          \g<real_effort>? \g<estimative>?
         /x
     end
 
