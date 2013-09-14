@@ -9,8 +9,26 @@ module Burndown
     end
 
     def estimative
-      return nil unless name =~ /\d+/
-      name[/\d+/].to_i
+      estimative = estimatives[:estimative]
+      return nil unless estimative
+      estimative[/\d+/].to_i
+    end
+
+    private
+
+    def estimatives
+      estimatives_regex.match(name) || {
+        estimative: nil,
+        effort:     nil
+      }
+    end
+
+    def estimatives_regex
+        /
+          (?<estimative>\((\d+)\)){0}
+
+          \g<estimative>
+        /x
     end
 
   end

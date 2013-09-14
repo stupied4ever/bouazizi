@@ -13,6 +13,12 @@ module Burndown
         it { expect(subject).to eq(nil) }
       end
 
+      context 'with estimative and real effort' do
+        let(:name) { '[4](3) without estimative' }
+
+        it { expect(subject).to eq(3) }
+      end
+
       let(:name) { '(3) easy card' }
 
       it { expect(subject).to eq(3) }
